@@ -1,0 +1,14 @@
+version: '3'
+services:
+  pg:
+    image: postgres:9.6.11
+    ports:
+      - "5432:5432"
+    volumes:
+      - $PWD/docker/pgdata:/var/lib/postgresql/data/pgdata
+      - $PWD/sql:/sqlscripts
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_USER=sample
+      - POSTGRES_DB=sample
+      - POSTGRES_PASSWORD=1qazXSW@

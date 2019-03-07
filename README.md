@@ -20,3 +20,15 @@ Stacks
     - ORMapper library
 - [passport](http://www.passportjs.org)
     - Authentication library
+
+Specification
+-----
+
+- Signup
+- Signin
+- Event List
+- Event Detail
+- Join Event
+    - requires sign in
+- User Profile
+    - Show joined event

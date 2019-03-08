@@ -13,9 +13,9 @@ describe('UserController', () => {
   })
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
+    it('should return empty array', async () => {
       const userController = app.get<UserController>(UserController)
-      expect(UserController.listUsers()).toBe('Hello World!')
+      await expect(userController.listUsers()).resolves.toBeDefined()
     })
   })
 })

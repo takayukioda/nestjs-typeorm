@@ -1,28 +1,33 @@
-import { Injectable, Inject } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import * as shortid from 'shortid'
 import { Repository } from 'typeorm'
 import { User } from './user.entity'
-import * as shortid from 'shortid'
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
-
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find()
-  }
+  ) { }
 
   async createUser(): Promise<User> {
     const user = new User({
-      name: 'john',
-      email: `${shortid.generate()}`,
+      name: `john ${shortid.generate()}`,
+      email: `john.${shortid.generate()}@example.com`,
       password: 'password',
       createdAt: Date.now(),
       updatedAt: Date.now(),
     })
-    return await this.userRepository.save(user)
+    return this.userRepository.save(user)
   }
+
+  async findAll(): Promise<User[]> {
+    return this.userRepository.find()
+  }
+
+  async findOne(id: number): Promise<User> {
+    return this.userRepository.findOne(id)
+  }
+
 }

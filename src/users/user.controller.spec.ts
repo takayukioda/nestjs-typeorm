@@ -12,7 +12,7 @@ describe('UserController', () => {
     }).compile()
   })
 
-  describe('root', () => {
+  describe('user list', () => {
     it('should return empty array', async () => {
       const userController = app.get<UserController>(UserController)
       await expect(userController.listUsers()).resolves.toBeDefined()

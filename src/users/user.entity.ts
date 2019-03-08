@@ -14,7 +14,7 @@ export class User {
 
   @Exclude()
   @Column('varchar', { length: 255 })
-  password: string
+  password: Password
 
   @Column('bigint')
   createdAt: number

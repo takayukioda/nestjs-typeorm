@@ -15,12 +15,12 @@ export class UserController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   async listUsers(): Promise<User[]> {
-    return await this.userService.findAll()
+    return this.userService.findAll()
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   async createUser(): Promise<User> {
-    return await this.userService.createUser()
+    return this.userService.createUser()
   }
 }

@@ -12,11 +12,11 @@ const ormconfig: TypeOrmModuleOptions = {
   password: '1qazXSW@',
   database: 'sample',
   entities: [`${__dirname}/**/*.entity.{ts,js}`],
-  synchronize: true,
+  synchronize: false,
 }
 @Module({
   imports: [TypeOrmModule.forRoot(ormconfig), UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

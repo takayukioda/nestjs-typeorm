@@ -8,7 +8,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly passwordService: PasswordService,
-  ) {}
+  ) { }
 
   async signin(email: string, password: RawPassword): Promise<User> {
     const user = await this.userService.findOneBy({ email })

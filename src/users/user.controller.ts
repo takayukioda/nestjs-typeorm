@@ -7,12 +7,6 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @UseInterceptors(ClassSerializerInterceptor)
-  @Post()
-  async createUser(): Promise<User> {
-    return this.userService.createUser()
-  }
-
-  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   async listUsers(): Promise<User[]> {
     return this.userService.findAll()

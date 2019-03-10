@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { User } from 'src/users/user.entity'
 import { UserService } from '../users/user.service'
 import { PasswordService } from './password.service'
+import { UserCreateDto } from 'src/users/user.dto';
+import { RawPassword, HashedPassword } from 'src/type';
 
 @Injectable()
 export class AuthService {
@@ -10,6 +12,12 @@ export class AuthService {
     private readonly passwordService: PasswordService,
   ) { }
 
+  async signup(name: string, email: string, password: RawPassword): Promise<User> {
+    const hashedPassword = this.passwordService.hash(password)
+    const dto: UserCreateDto = new UserCreateDto(name, email, hashedPassword)
+    return this.userService.createUser(dto)
+  }
+
   async signin(email: string, password: RawPassword): Promise<User> {
     const user = await this.userService.findOneBy({ email })
     if (!user) {
@@ -17,7 +25,7 @@ export class AuthService {
       // this exception should only be used by controllers
       throw new NotFoundException()
     }
-    if (!this.passwordService.match(password, user.password)) {
+    if (!this.passwordService.match(password, user.password as HashedPassword)) {
       // TODO: replace with dedicated exception;
       // this exception should only be used by controllers
       throw new NotFoundException()

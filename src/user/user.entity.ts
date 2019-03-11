@@ -1,11 +1,11 @@
 import { Exclude } from 'class-transformer'
 import { Password } from 'src/type'
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn()
-  id: number
+  readonly id?: number
 
   @Column('varchar', { length: 255 })
   name: string
@@ -17,11 +17,11 @@ export class User {
   @Column('varchar', { length: 255 })
   password: Password
 
-  @Column('bigint')
-  createdAt: number
+  @CreateDateColumn({ type: 'bigint', name: 'created_at' })
+  readonly createdAt?: number
 
-  @Column('bigint')
-  updatedAt: number
+  @UpdateDateColumn({ type: 'bigint', name: 'updated_at' })
+  readonly updatedAt?: number
 
   constructor(partial: Partial<User>) {
     Object.assign(this, partial)

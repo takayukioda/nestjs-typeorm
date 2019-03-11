@@ -10,5 +10,4 @@ export class UserCreateDto {
     this.email = email
     this.password = password
   }
-
 }

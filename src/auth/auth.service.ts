@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { HashedPassword, RawPassword } from 'src/type'
-import { UserCreateDto } from 'src/users/user.dto'
-import { User } from 'src/users/user.entity'
-import { UserService } from '../users/user.service'
+import { UserCreateDto } from 'src/user/user.dto'
+import { User } from 'src/user/user.entity'
+import { UserService } from '../user/user.service'
 import { PasswordService } from './password.service'
 
 @Injectable()

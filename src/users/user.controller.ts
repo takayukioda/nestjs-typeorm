@@ -1,4 +1,4 @@
-import { ClassSerializerInterceptor, Controller, Get, Param, Post, UseInterceptors } from '@nestjs/common'
+import { ClassSerializerInterceptor, Controller, Get, Param, UseInterceptors } from '@nestjs/common'
 import { User } from './user.entity'
 import { UserService } from './user.service'
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcrypt'
-import { RawPassword, HashedPassword } from 'src/type';
+import { HashedPassword, RawPassword } from 'src/type'
 
 const STRETCHING_ROUND = 14
 @Injectable()

@@ -1,7 +1,8 @@
-import { ClassSerializerInterceptor, Controller, Post, UseInterceptors, Body, Req } from '@nestjs/common'
+import { Body, ClassSerializerInterceptor, Controller, Post, Req, UseInterceptors } from '@nestjs/common'
+import { Request } from 'express'
+import { RawPassword } from 'src/type'
+import { User } from 'src/users/user.entity'
 import { AuthService } from './auth.service'
-import { User } from 'src/users/user.entity';
-import { RawPassword } from 'src/type';
 
 @Controller('auth')
 export class AuthController {
@@ -9,13 +10,18 @@ export class AuthController {
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('signup')
-  async signup(@Req() req, @Body('name') name: string, @Body('email') email: string, @Body('password') password: RawPassword): Promise<User> {
+  async signup(
+    @Req() req: Request,
+    @Body('name') name: string,
+    @Body('email') email: string,
+    @Body('password') password: RawPassword,
+  ): Promise<User> {
     return this.authService.signup(name, email, password)
   }
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('signin')
-  async signin(@Body('email') email: string, @Body('pasword') password: RawPassword): Promise<User> {
+  async signin(@Body('email') email: string, @Body('password') password: RawPassword): Promise<User> {
     return this.authService.signin(email, password)
   }
 

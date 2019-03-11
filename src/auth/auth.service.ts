@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
+import { HashedPassword, RawPassword } from 'src/type'
+import { UserCreateDto } from 'src/users/user.dto'
 import { User } from 'src/users/user.entity'
 import { UserService } from '../users/user.service'
 import { PasswordService } from './password.service'
-import { UserCreateDto } from 'src/users/user.dto';
-import { RawPassword, HashedPassword } from 'src/type';
 
 @Injectable()
 export class AuthService {

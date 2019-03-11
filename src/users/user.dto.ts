@@ -1,9 +1,9 @@
 import { HashedPassword } from 'src/type'
 
 export class UserCreateDto {
-  readonly name: string;
-  readonly email: string;
-  readonly password: HashedPassword;
+  readonly name: string
+  readonly email: string
+  readonly password: HashedPassword
 
   constructor(name: string, email: string, password: HashedPassword) {
     this.name = name

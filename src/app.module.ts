@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common'
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
-import { UserModule } from './users/user.module'
+import { AuthModule } from './auth/auth.module'
+import { UserModule } from './user/user.module'
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -12,11 +13,15 @@ const ormconfig: TypeOrmModuleOptions = {
   password: '1qazXSW@',
   database: 'sample',
   entities: [`${__dirname}/**/*.entity.{ts,js}`],
-  synchronize: true,
+  synchronize: false,
 }
 @Module({
-  imports: [TypeOrmModule.forRoot(ormconfig), UserModule],
+  imports: [
+    TypeOrmModule.forRoot(ormconfig),
+    UserModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

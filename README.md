@@ -3,23 +3,22 @@ nestjs-typeorm
 
 Sample repository for TypeScript base web application.
 
-Environment & Tool
+Get Started
+-----
+- Install all requirements.
+- `./helper.sh up` to start docker container
+- `migrate -source file://migrations -database postgres://sample:1qazXSW@@localhost:5432/sample?sslmode=disable up` to execute necessary migrations for the first time
+- `yarn` to install frontend dependencies
+- `yarn start:dev` to start dev server
+- accessing `localhost:3000` should display a hello world
+
+Requirements
 -----
 
-- [PostgreSQL 9.6.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html)
-  - Database
-- [migrate](https://github.com/golang-migrate/migrate)
-  - Database migration tool
-
-Stacks
------
-
-- [nestjs](https://nestjs.com/)
-  - RESTful API server library
-- [typeorm](https://typeorm.io/)
-  - ORMapper library
-- [passport](http://www.passportjs.org)
-  - Authentication library
+- [Docker](https://hub.docker.com/editions/community/docker-ce-desktop- mac) - Virtualization
+- [PostgreSQL 9.6.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html) - Database
+- [migrate](https://github.com/golang-migrate/migrate/tree/master/cli) - Database migration tool
+- [yarn](https://yarnpkg.com/en/docs/install#mac-stable) - Meow
 
 Specification
 -----

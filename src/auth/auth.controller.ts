@@ -1,7 +1,7 @@
 import { Body, ClassSerializerInterceptor, Controller, Post, Req, UseInterceptors } from '@nestjs/common'
 import { Request } from 'express'
 import { RawPassword } from 'src/type'
-import { User } from 'src/users/user.entity'
+import { User } from 'src/user/user.entity'
 import { AuthService } from './auth.service'
 
 @Controller('auth')

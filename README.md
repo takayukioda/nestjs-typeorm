@@ -15,10 +15,19 @@ Get Started
 Requirements
 -----
 
-- [Docker](https://hub.docker.com/editions/community/docker-ce-desktop- mac) - Virtualization
+- [Docker](https://hub.docker.com/editions/community/docker-ce-desktop-mac) - Virtualization
 - [PostgreSQL 9.6.11](https://www.postgresql.org/docs/9.6/release-9-6-11.html) - Database
 - [migrate](https://github.com/golang-migrate/migrate/tree/master/cli) - Database migration tool
 - [yarn](https://yarnpkg.com/en/docs/install#mac-stable) - Meow
+
+Tech Stack
+-----
+- [nestjs](https://nestjs.com/)
+  - RESTful API server library
+- [typeorm](https://typeorm.io/)
+  - ORMapper library
+- [passport](http://www.passportjs.org)
+  - Authentication library
 
 Specification
 -----

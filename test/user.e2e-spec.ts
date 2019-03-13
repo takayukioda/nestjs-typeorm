@@ -5,7 +5,7 @@ import { AppModule } from 'src/app.module'
 import { UserModule } from 'src/user/user.module'
 import { UserService } from 'src/user/user.service'
 
-describe('Users (e2e)', () => {
+describe('User Endpoints', () => {
   let app: INestApplication
   const mockUserService = {
     findAll: () => ['mockUser1', 'mockUser2'],

@@ -17,11 +17,11 @@ export class User {
   @Column('varchar', { length: 255 })
   password: Password
 
-  @CreateDateColumn({ type: 'bigint', name: 'created_at' })
-  readonly createdAt?: number
+  @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
+  readonly createdAt?: Date
 
-  @UpdateDateColumn({ type: 'bigint', name: 'updated_at' })
-  readonly updatedAt?: number
+  @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
+  readonly updatedAt?: Date
 
   constructor(partial: Partial<User>) {
     Object.assign(this, partial)

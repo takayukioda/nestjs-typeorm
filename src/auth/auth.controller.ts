@@ -3,6 +3,7 @@ import { Request } from 'express'
 import { RawPassword } from 'src/type'
 import { User } from 'src/user/user.entity'
 import { AuthService } from './auth.service'
+import { UserRepository } from 'src/user/user.repository'
 
 @Controller('auth')
 export class AuthController {

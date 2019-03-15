@@ -6,13 +6,16 @@ import { endianness } from 'os'
 export class LoggerMiddleware implements NestMiddleware {
   resolve(...args: any[]): MiddlewareFunction {
     return (req: Request, res: Response, next: NextFunction) => {
+      const requestedAt = Date.now()
+
       // small trick to get status code on response
       // https://stackoverflow.com/a/41010040
       // evade `end` function temporary and give it back once it's done.
       const end = res.end
       res.end = (chunck, encoding?) => {
         console.log(
-          `${req.ip} - - [${Date.now()}] "${req.method} ${req.originalUrl} ${req.hostname} ${res.statusCode}"`
+          // tslint:disable-next-line:max-line-length
+          `${req.ip} - - [${requestedAt}] "${req.method} ${req.originalUrl} ${req.hostname} ${res.statusCode}" ${Date.now() - requestedAt}ms`
         )
 
         res.end = end

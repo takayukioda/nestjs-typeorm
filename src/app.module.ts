@@ -15,6 +15,7 @@ const ormconfig: TypeOrmModuleOptions = {
   database: 'sample',
   entities: [`${__dirname}/**/*.entity.{ts,js}`],
   synchronize: false,
+  logging: true,
 }
 @Module({
   imports: [

@@ -21,7 +21,10 @@ export class AuthController {
 
   @UseInterceptors(ClassSerializerInterceptor)
   @Post('signin')
-  async signin(@Body('email') email: string, @Body('password') password: RawPassword): Promise<User> {
+  async signin(
+    @Body('email') email: string,
+    @Body('password') password: RawPassword
+  ): Promise<User> {
     return this.authService.signin(email, password)
   }
 

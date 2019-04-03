@@ -29,16 +29,26 @@ describe('UserController', () => {
             find() {
               return this._mock
             },
+            findOne() {
+              return this._mock
+            }
           }
         },
       ],
     }).compile()
   })
 
-  describe('user list', () => {
+  describe('listUsers()', () => {
     it('should return empty array', async () => {
       const userController = app.get<UserController>(UserController)
       await expect(userController.listUsers()).resolves.toBeDefined()
+    })
+  })
+
+  describe('getUser()', () => {
+    it('returns a user', async () => {
+      const userController = app.get<UserController>(UserController)
+      await expect(userController.getUser(1)).resolves.toBeDefined()
     })
   })
 })

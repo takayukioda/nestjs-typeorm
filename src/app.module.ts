@@ -4,7 +4,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
-import { LoggerMiddleware } from './middlewares/logger.middleware'
+import { loggerMiddleware } from './middlewares/logger.middleware'
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -29,7 +29,7 @@ const ormconfig: TypeOrmModuleOptions = {
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddleware)
+      .apply(loggerMiddleware)
       .forRoutes('*')
   }
 }

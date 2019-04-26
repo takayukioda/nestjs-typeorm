@@ -5,6 +5,7 @@ readonly SCRIPT_DIR=${0%/*}
 readonly DATABASE=sample
 readonly DATABASE_USER=sample
 readonly DATABASE_PASS="1qazXSW@"
+readonly DATABASE_HOST="127.0.0.1"
 readonly DATABASE_PORT=5432
 
 helps() {
@@ -71,7 +72,10 @@ dockerpsql() {
 		docker-compose exec --user postgres pg psql -U${username} -d${database}
 	fi
 }
-now=$(date +%Y%m%d%H%M)
+run_migrate() {
+	migrate -database postgres://${DATABASE_USER}:${DATABASE_PASS}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE}?sslmode=disable -source file://migrations $@
+}
+
 case $1 in
 	# Control docker containers
 	start|up) start ;;
@@ -85,6 +89,7 @@ case $1 in
 	# Accessing individual containers
 	ssh) dockerssh ${2:-pg} ;;
 	db|psql) dockerpsql ;;
+	migrate) shift 1; run_migrate $@ ;;
 
 	# Usage (may not well maintained :P)
 	help) helps ${2:-all} ;;

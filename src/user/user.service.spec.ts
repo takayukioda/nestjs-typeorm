@@ -1,16 +1,17 @@
-import { DynamicModule } from '@nestjs/common';
-import { Test, TestingModule } from '@nestjs/testing';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { HashedPassword } from 'src/type';
-import { initializeTransactionalContext } from 'typeorm-transactional-cls-hooked';
-import { UserRepository } from './user.repository';
-import { UserService } from './user.service';
+import { Test, TestingModule } from '@nestjs/testing'
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { HashedPassword } from 'src/type'
+import { initializeTransactionalContext } from 'typeorm-transactional-cls-hooked'
+import { UserRepository } from './user.repository'
+import { UserService } from './user.service'
 
 describe('UserService', () => {
+  let module: TestingModule
   let service: UserService
 
   beforeAll(async () => {
-    console.log('----- calling beforeAll')
+    initializeTransactionalContext()
+
     const testdbconf: TypeOrmModuleOptions = {
       type: 'postgres',
       host: 'localhost',
@@ -23,17 +24,18 @@ describe('UserService', () => {
       logging: ['query', 'error'],
     }
 
-    const module: TestingModule = await Test.createTestingModule({
+    module = await Test.createTestingModule({
       imports: [
         TypeOrmModule.forRoot(testdbconf),
         TypeOrmModule.forFeature([UserRepository])
       ],
-      providers: [UserRepository, UserService],
+      providers: [UserService],
     }).compile()
 
-    initializeTransactionalContext()
-
-    service = module.get<UserService>(UserService)
+    service = module.get(UserService)
+  })
+  afterAll(async () => {
+    module.close()
   })
 
   it('should be defined', () => {
@@ -43,7 +45,7 @@ describe('UserService', () => {
   describe('createUser', () => {
     it('should success', async () => {
       const key = Date.now()
-      const newUser = service.createUser({
+      const newUser = await service.createUser({
         email: `test.${key}@example.com`,
         name: `tester.${key}`,
         password: `${key}` as HashedPassword,

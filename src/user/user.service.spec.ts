@@ -1,42 +1,56 @@
 import { Test, TestingModule } from '@nestjs/testing'
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { HashedPassword } from 'src/type'
+import { initializeTransactionalContext } from 'typeorm-transactional-cls-hooked'
+import { UserRepository } from './user.repository'
 import { UserService } from './user.service'
-import { getRepositoryToken } from '@nestjs/typeorm'
-import { User } from './user.entity'
-import { RawPassword } from 'src/type'
 
 describe('UserService', () => {
+  let module: TestingModule
   let service: UserService
 
-  beforeEach(async () => {
-    const now = Date.now()
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        UserService,
-        {
-          // ToDo: Make it more nicer, wrap with gentle utility
-          provide: getRepositoryToken(User),
-          useValue: {
-            _mock: {
-              id: 1,
-              email: 'initial-user@test.com',
-              password: 'password' as RawPassword,
-              name: 'initial-user',
-              createdAt: now,
-              updatedAt: now,
-            },
-            find() {
-              return this._mock
-            },
-          }
-        },
+  beforeAll(async () => {
+    initializeTransactionalContext()
 
+    const testdbconf: TypeOrmModuleOptions = {
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'sample',
+      password: '!QAZxsw2',
+      database: 'sample',
+      entities: [`${__dirname}/../**/*.entity.{ts,js}`],
+      synchronize: false,
+      logging: ['query', 'error'],
+    }
+
+    module = await Test.createTestingModule({
+      imports: [
+        TypeOrmModule.forRoot(testdbconf),
+        TypeOrmModule.forFeature([UserRepository])
       ],
+      providers: [UserService],
     }).compile()
 
-    service = module.get<UserService>(UserService)
+    service = module.get(UserService)
+  })
+  afterAll(async () => {
+    module.close()
   })
 
   it('should be defined', () => {
     expect(service).toBeDefined()
+  })
+
+  describe('createUser', () => {
+    it('should success', async () => {
+      const key = Date.now()
+      const newUser = await service.createUser({
+        email: `test.${key}@example.com`,
+        name: `tester.${key}`,
+        password: `${key}` as HashedPassword,
+      })
+      expect(newUser).toBeDefined()
+    })
   })
 })

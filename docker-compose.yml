@@ -11,4 +11,4 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_USER=sample
       - POSTGRES_DB=sample
-      - POSTGRES_PASSWORD=1qazXSW@
+      - POSTGRES_PASSWORD=!QAZxsw2

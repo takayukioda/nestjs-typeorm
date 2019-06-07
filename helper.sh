@@ -4,7 +4,7 @@ readonly SCRIPT_DIR=${0%/*}
 
 readonly DATABASE=sample
 readonly DATABASE_USER=sample
-readonly DATABASE_PASS="1qazXSW@"
+readonly DATABASE_PASS="!QAZxsw2"
 readonly DATABASE_HOST="127.0.0.1"
 readonly DATABASE_PORT=5432
 

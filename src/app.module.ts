@@ -11,7 +11,7 @@ const ormconfig: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 5432,
   username: 'sample',
-  password: '1qazXSW@',
+  password: '!QAZxsw2',
   database: 'sample',
   entities: [`${__dirname}/**/*.entity.{ts,js}`],
   synchronize: false,

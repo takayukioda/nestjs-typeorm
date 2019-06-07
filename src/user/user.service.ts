@@ -1,15 +1,14 @@
 import { Injectable } from '@nestjs/common'
-import { InjectRepository } from '@nestjs/typeorm'
-import { FindConditions, Repository } from 'typeorm'
+import { FindConditions } from 'typeorm'
 import { Transactional } from 'typeorm-transactional-cls-hooked'
 import { UserCreateDto } from './user.dto'
 import { User } from './user.entity'
+import { UserRepository } from './user.repository'
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    private readonly userRepository: UserRepository,
   ) { }
 
   @Transactional()

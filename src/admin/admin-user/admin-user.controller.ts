@@ -2,7 +2,7 @@ import { ClassSerializerInterceptor, Controller, Get, Param, UseInterceptors } f
 import { AdminUser } from './admin-user.entity'
 import { AdminUserService } from './admin-user.service'
 
-@Controller('/admin/users')
+@Controller('users')
 export class AdminUserController {
   constructor(private readonly service: AdminUserService) { }
 

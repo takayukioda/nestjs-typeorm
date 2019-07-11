@@ -27,6 +27,7 @@
     "bcrypt": "^3.0.4",
     "class-transformer": "^0.2.0",
     "cls-hooked": "^4.2.2",
+    "nest-router": "1.0.9",
     "pg": "^7.9.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",

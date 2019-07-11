@@ -1,11 +1,13 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { RouterModule } from 'nest-router'
+import { AdminUserModule } from './admin/admin-user/admin-user.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
-import { UserModule } from './user/user.module'
 import { loggerMiddleware } from './middlewares/logger.middleware'
-import { AdminUserModule } from './admin/admin-user/admin-user.module'
+import { routes } from './router'
+import { UserModule } from './user/user.module'
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -20,6 +22,7 @@ const ormconfig: TypeOrmModuleOptions = {
 }
 @Module({
   imports: [
+    RouterModule.forRoutes(routes),
     TypeOrmModule.forRoot(ormconfig),
     UserModule,
     AuthModule,

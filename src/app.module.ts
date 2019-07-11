@@ -5,6 +5,7 @@ import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { loggerMiddleware } from './middlewares/logger.middleware'
+import { AdminUserModule } from './admin/admin-user/admin-user.module'
 
 const ormconfig: TypeOrmModuleOptions = {
   type: 'postgres',
@@ -22,6 +23,7 @@ const ormconfig: TypeOrmModuleOptions = {
     TypeOrmModule.forRoot(ormconfig),
     UserModule,
     AuthModule,
+    AdminUserModule
   ],
   controllers: [AppController],
   providers: [AppService],
